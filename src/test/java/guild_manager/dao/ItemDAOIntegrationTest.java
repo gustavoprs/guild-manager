@@ -47,7 +47,12 @@ public class ItemDAOIntegrationTest {
 
 	@Test
 	void testSaveAndGetById(){
-		Item item = new Item("Sword", "Weapon", null);
+		Adventurer adventurer = new Adventurer("John", 5, "Rogue");
+		entityManager.getTransaction().begin();
+    entityManager.persist(adventurer); 
+    entityManager.getTransaction().commit();
+
+		Item item = new Item("Sword", "Weapon", adventurer);
 		
 		entityManager.getTransaction().begin();
 		itemDAO.save(item);
@@ -86,7 +91,12 @@ public class ItemDAOIntegrationTest {
 
 	@Test
 	void testDelete(){
-		Item item = new Item("Sword", "Weapon", null);
+		Adventurer adventurer = new Adventurer("John", 5, "Rogue");
+		entityManager.getTransaction().begin();
+    entityManager.persist(adventurer); 
+    entityManager.getTransaction().commit();
+
+		Item item = new Item("Sword", "Weapon", adventurer);
 
 		entityManager.getTransaction().begin();
 		itemDAO.save(item);
