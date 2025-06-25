@@ -39,8 +39,9 @@ public class AdventurerDAOIntegrationTest {
 
 	@AfterEach
 	void tearDown(){
-		entityManager = entityManagerFactory.createEntityManager();
-		adventurerDAO = new AdventurerDAO(entityManager);
+		if(entityManager.isOpen()) {
+				entityManager.close();
+		}
 	}
 
 	@Test
