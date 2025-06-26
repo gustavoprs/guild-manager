@@ -27,6 +27,11 @@ public class Item {
 
 	public Item(){}
 
+	public Item(String name, String type){
+		this.name = name;
+		this.type = type;
+	}
+
 	public Item(String name, String type, Adventurer owner){
 		this.name = name;
 		this.type = type;
