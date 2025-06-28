@@ -64,4 +64,4 @@ public class Item {
 		return "The item " + this.getName() + " of type " + this.getType() + " belongs to the adventurer " + this.getOwner().getName();  
 	}
 
-}
+} 
