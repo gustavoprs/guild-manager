@@ -67,6 +67,14 @@ public class Adventurer {
 		this.role = role;
 	}
 
+	public void setName(String name){
+		this.name = name;
+	}
+
+	public void setLevel(int level){
+		this.level = level;
+	}
+
 	public Set<Item> getItems(){
 		return this.items;
 	}

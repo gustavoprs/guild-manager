@@ -75,7 +75,7 @@ public class Item {
 
 		@Override
 	public String toString(){
-		String string = "Name: " + getName() + " | Type: " + getType();
+		String string = "ID: " + getId() + " | Name: " + getName() + " | Type: " + getType();
 		
 		Adventurer owner = getOwner();
 		if(owner != null){

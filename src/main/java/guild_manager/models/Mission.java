@@ -85,7 +85,17 @@ public class Mission {
 
 	@Override
 	public String toString(){
-		return "Title: " + getTitle() + "\nDescription: " + getDescription();
+		return "ID: " + getId() + "\nTitle: " + getTitle() + " ["+getStatus()+"]" +"\nDescription: " + getDescription();
+	}
+
+	public String printAssignedParty() {
+		String partyString = "";
+		for(Adventurer adv : getParticipants()) {
+			partyString += "\n" + adv.getName() + " ["+adv.getRole()+"]";
+		}
+		if(partyString.equals("")) partyString = "No one is assigned to this mission.";
+
+		return partyString;
 	}
 
 }
