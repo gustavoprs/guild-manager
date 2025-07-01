@@ -54,7 +54,8 @@ public class AdventurerDAOUnitTest {
   @Test
   @DisplayName("Testa chamado de createQuery")
   public void testCallCreateQuery() {
-    TypedQuery<Adventurer> mockQuery = mock(TypedQuery.class);
+    @SuppressWarnings("unchecked")
+		TypedQuery<Adventurer> mockQuery = mock(TypedQuery.class);
 
     when(entityManager.createQuery("FROM Adventurer", Adventurer.class)).thenReturn(mockQuery);
     adventurerDAO.getAll();

@@ -54,7 +54,8 @@ public class MissionDAOUnitTest {
   @Test
   @DisplayName("Testa chamado de createQuery")
   public void testCallCreateQuery() {
-    TypedQuery<Mission> mockQuery = mock(TypedQuery.class);
+    @SuppressWarnings("unchecked")
+		TypedQuery<Mission> mockQuery = mock(TypedQuery.class);
 
     when(entityManager.createQuery("FROM Mission", Mission.class)).thenReturn(mockQuery);
     missionDAO.getAll();
