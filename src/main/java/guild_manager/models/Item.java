@@ -20,7 +20,7 @@ public class Item {
 	private String type;
 
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "owner_id", nullable = false)
+	@JoinColumn(name = "owner_id")
 	private Adventurer owner;
 
 	/* Constructors */
@@ -61,7 +61,15 @@ public class Item {
 	}
 
 	public String describe(){
-		return "The item " + this.getName() + " of type " + this.getType() + " belongs to the adventurer " + this.getOwner().getName();  
-	}
+		String description = "The item " + this.getName() + " of type " + this.getType(); 
+		
+		Adventurer owner = getOwner();
+		if(owner != null){
+			description += " belongs to the adventurer " + this.getOwner().getName();
+		} else {
+			description += " belongs to no one";
+		}
 
+		return description;  
+	}
 } 
