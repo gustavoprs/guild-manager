@@ -72,4 +72,19 @@ public class Item {
 
 		return description;  
 	}
+
+		@Override
+	public String toString(){
+		String string = "Name: " + getName() + " | Type: " + getType();
+		
+		Adventurer owner = getOwner();
+		if(owner != null){
+			string += " | Owner: " + getOwner().getName();
+		} else {
+			string += " | Owner: No one";
+		}
+		
+		return string;
+	}
+
 } 

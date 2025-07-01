@@ -85,4 +85,9 @@ public class Adventurer {
 		items.add(item);
 	}
 
+	@Override
+	public String toString(){
+		return "ID: " +  getId() +  " | Name: " + getName() + " | Level: " + getLevel() + " | " + "Role: " + getRole();
+	}
+
 }

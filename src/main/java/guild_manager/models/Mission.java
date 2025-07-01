@@ -83,4 +83,9 @@ public class Mission {
 		return participants.contains(adventurer);
 	}
 
+	@Override
+	public String toString(){
+		return "Title: " + getTitle() + "\nDescription: " + getDescription();
+	}
+
 }
