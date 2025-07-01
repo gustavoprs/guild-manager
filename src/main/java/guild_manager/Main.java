@@ -12,7 +12,6 @@ import guild_manager.models.Mission;
 import guild_manager.utils.InputHandler;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.Persistence;
-import jakarta.persistence.criteria.CriteriaBuilder.In;
 
 public class Main {
 
