@@ -451,9 +451,14 @@ public class Main {
 						System.out.println("\nCanceling...");
 						break;
 					}
+
 					mission = missionDAO.getById(id);
+										
 					if (mission == null) {
 						System.out.println("Mission not found.");
+						break;
+					} else if(mission.getStatus().equals("Cleared") || mission.getStatus().equals("Failed")){
+						System.out.println("Mission already finished.");
 						break;
 					}
 
@@ -482,6 +487,9 @@ public class Main {
 					mission = missionDAO.getById(id);
 					if (mission == null) {
 						System.out.println("Mission not found.");
+						break;
+					} else if(mission.getStatus().equals("Cleared") || mission.getStatus().equals("Failed")){
+						System.out.println("Mission already finished.");
 						break;
 					}
 
