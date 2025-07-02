@@ -332,7 +332,7 @@ public class Main {
 			System.out.println("[3] Remove Missions");
 			System.out.println("[4] Change Mission Status");
 			System.out.println("[5] Assign Adventurer to Mission");
-			System.out.println("[6] Unassign Adventurer to Mission");
+			System.out.println("[6] Unassign Adventurer from Mission");
 			System.out.println("[7] View Mission Party");
 			System.out.println("[0] Back");
 			option = InputHandler.readInt(scanner, "Option: ");
