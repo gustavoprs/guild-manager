@@ -270,7 +270,11 @@ public class Main {
 						break;
 					}
 
-					int advId = InputHandler.readInt(scanner, "Adventurer ID to assign item to: ");
+					int advId = InputHandler.readInt(scanner, "Adventurer ID to assign item to (0 to Cancel): ");
+					if (advId == 0) {
+						System.out.println("\nCanceling...");
+						break;
+					}
 					Adventurer owner = new AdventurerDAO(entityManager).getById(advId);
 					if (owner == null) {
 						System.out.println("Adventurer not found.");
