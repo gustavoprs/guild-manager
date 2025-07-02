@@ -318,9 +318,12 @@ public class Main {
 	}
 
 	public static void missionsMenu(){
+
 		int option;
 		MissionDAO missionDAO = new MissionDAO(entityManager);
 		Mission mission;
+		Adventurer adventurer;
+		int advId;
 
 		do{
 			System.out.println("\n--- MISSIONS MENU ---");
@@ -329,7 +332,8 @@ public class Main {
 			System.out.println("[3] Remove Missions");
 			System.out.println("[4] Change Mission Status");
 			System.out.println("[5] Assign Adventurer to Mission");
-			System.out.println("[6] View Mission Party");
+			System.out.println("[6] Unassign Adventurer to Mission");
+			System.out.println("[7] View Mission Party");
 			System.out.println("[0] Back");
 			option = InputHandler.readInt(scanner, "Option: ");
 
@@ -453,8 +457,8 @@ public class Main {
 						break;
 					}
 
-					int advId = InputHandler.readInt(scanner, "Adventurer ID to add: ");
-					Adventurer adventurer = new AdventurerDAO(entityManager).getById(advId);
+					advId = InputHandler.readInt(scanner, "Adventurer ID to add: ");
+					adventurer = new AdventurerDAO(entityManager).getById(advId);
 					if (adventurer == null) {
 						System.out.println("Adventurer not found.");
 						break;
@@ -470,6 +474,34 @@ public class Main {
 					System.out.println("Adventurer added to mission!");
 					break;
 				case 6:
+					id = InputHandler.readInt(scanner, "\nMission ID to unassociate (0 to Cancel): ");
+					if (id == 0) {
+						System.out.println("\nCanceling...");
+						break;
+					}
+					mission = missionDAO.getById(id);
+					if (mission == null) {
+						System.out.println("Mission not found.");
+						break;
+					}
+
+					advId = InputHandler.readInt(scanner, "Adventurer ID to remove: ");
+					adventurer = new AdventurerDAO(entityManager).getById(advId);
+					if (adventurer == null) {
+						System.out.println("Adventurer not found.");
+						break;
+					}
+
+					entityManager.getTransaction().begin();
+					mission.getParticipants().remove(adventurer);
+					adventurer.getMissions().remove(mission);
+					entityManager.merge(mission);
+					entityManager.merge(adventurer);
+					entityManager.getTransaction().commit();
+
+					System.out.println("Adventurer removed from mission!");
+					break;
+				case 7:
 					id = InputHandler.readInt(scanner, "\nMission ID to view party (0 to Cancel): ");
 					if (id == 0) {
 						System.out.println("\nCanceling...");
