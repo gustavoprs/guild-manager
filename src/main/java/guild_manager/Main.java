@@ -482,7 +482,12 @@ public class Main {
 						break;
 					}
 
-					advId = InputHandler.readInt(scanner, "Adventurer ID to add: ");
+					advId = InputHandler.readInt(scanner, "Adventurer ID to add (0 to Cancel): ");
+					if (advId == 0) {
+						System.out.println("\nCanceling...");
+						break;
+					}
+
 					adventurer = new AdventurerDAO(entityManager).getById(advId);
 					if (adventurer == null) {
 						System.out.println("Adventurer not found.");
@@ -513,7 +518,12 @@ public class Main {
 						break;
 					}
 
-					advId = InputHandler.readInt(scanner, "Adventurer ID to remove: ");
+					advId = InputHandler.readInt(scanner, "Adventurer ID to remove (0 to Cancel): ");
+					if (advId == 0) {
+						System.out.println("\nCanceling...");
+						break;
+					}
+
 					adventurer = new AdventurerDAO(entityManager).getById(advId);
 					if (adventurer == null) {
 						System.out.println("Adventurer not found.");
