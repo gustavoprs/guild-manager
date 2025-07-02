@@ -66,8 +66,8 @@ public class Main {
 			System.out.println("\n--- ADVENTURERS MENU ---");
 			System.out.println("[1] List Adventurers");
 			System.out.println("[2] Register Adventurer");
-			System.out.println("[3] Unregister Adventurer");
-			System.out.println("[4] Update Adventurer information");
+			System.out.println("[3] Update Adventurer information");
+			System.out.println("[4] Unregister Adventurer");
 			System.out.println("[0] Back");
 			option = InputHandler.readInt(scanner, "Option: ");
 
@@ -107,37 +107,6 @@ public class Main {
 				}
 				case 3: {
 					int id;
-				
-					do {
-						id = InputHandler.readInt(scanner, "\nAdventurer ID (0 to Cancel): "); 
-						if(id < 0){
-							System.out.println("\nInvalid ID, type again.");
-						}
-					} while (id < 0);
-
-					if(id == 0){
-						System.out.println("\nCanceling...");
-						break;
-					}
-
-					adventurer = adventurerDAO.getById(id);
-					if(adventurer == null){
-						System.out.println("Adventurer not found.");
-						break;
-					}
-
-					System.out.println("\nDeleting adventurer '"+ adventurer.getName() +"'...");
-
-					entityManager.getTransaction().begin();
-					adventurerDAO.delete(adventurer);
-					entityManager.getTransaction().commit();
-
-					System.out.println("Adventurer deleted!");
-
-					break;
-				}
-				case 4: {
-					int id;
 					do {
 						id = InputHandler.readInt(scanner, "\nAdventurer ID (0 to Cancel): ");
 						if (id < 0) {
@@ -175,6 +144,37 @@ public class Main {
 					adventurerDAO.update(adventurer);
 
 					System.out.println("\nAdventurer updated successfully!");
+					break;
+				}
+				case 4: {
+					int id;
+				
+					do {
+						id = InputHandler.readInt(scanner, "\nAdventurer ID (0 to Cancel): "); 
+						if(id < 0){
+							System.out.println("\nInvalid ID, type again.");
+						}
+					} while (id < 0);
+
+					if(id == 0){
+						System.out.println("\nCanceling...");
+						break;
+					}
+
+					adventurer = adventurerDAO.getById(id);
+					if(adventurer == null){
+						System.out.println("Adventurer not found.");
+						break;
+					}
+
+					System.out.println("\nDeleting adventurer '"+ adventurer.getName() +"'...");
+
+					entityManager.getTransaction().begin();
+					adventurerDAO.delete(adventurer);
+					entityManager.getTransaction().commit();
+
+					System.out.println("Adventurer deleted!");
+
 					break;
 				}
 				case 0:
@@ -331,9 +331,9 @@ public class Main {
 			System.out.println("[2] Add Missions");
 			System.out.println("[3] Remove Missions");
 			System.out.println("[4] Change Mission Status");
-			System.out.println("[5] Assign Adventurer to Mission");
-			System.out.println("[6] Unassign Adventurer from Mission");
-			System.out.println("[7] View Mission Party");
+			System.out.println("[5] View Mission Party");
+			System.out.println("[6] Assign Adventurer to Mission");
+			System.out.println("[7] Unassign Adventurer from Mission");
 			System.out.println("[0] Back");
 			option = InputHandler.readInt(scanner, "Option: ");
 
@@ -446,6 +446,22 @@ public class Main {
 						System.out.println("\nMission status updated to '" + newStatus + "'");
 						break;
 				case 5:
+					id = InputHandler.readInt(scanner, "\nMission ID to view party (0 to Cancel): ");
+					if (id == 0) {
+						System.out.println("\nCanceling...");
+						break;
+					}
+
+					mission = missionDAO.getById(id);
+					if (mission == null) {
+						System.out.println("Mission not found.");
+						break;
+					}
+
+					System.out.println("\n--- Assigned Party ---");
+					System.out.println(mission.printAssignedParty());
+				break;
+				case 6:
 					id = InputHandler.readInt(scanner, "\nMission ID to associate (0 to Cancel): ");
 					if (id == 0) {
 						System.out.println("\nCanceling...");
@@ -478,7 +494,7 @@ public class Main {
 
 					System.out.println("Adventurer added to mission!");
 					break;
-				case 6:
+				case 7:
 					id = InputHandler.readInt(scanner, "\nMission ID to unassociate (0 to Cancel): ");
 					if (id == 0) {
 						System.out.println("\nCanceling...");
@@ -508,22 +524,6 @@ public class Main {
 					entityManager.getTransaction().commit();
 
 					System.out.println("Adventurer removed from mission!");
-					break;
-				case 7:
-					id = InputHandler.readInt(scanner, "\nMission ID to view party (0 to Cancel): ");
-					if (id == 0) {
-						System.out.println("\nCanceling...");
-						break;
-					}
-
-					mission = missionDAO.getById(id);
-					if (mission == null) {
-						System.out.println("Mission not found.");
-						break;
-					}
-
-					System.out.println("\n--- Assigned Party ---");
-					System.out.println(mission.printAssignedParty());
 					break;
 				case 0:
 					break;
